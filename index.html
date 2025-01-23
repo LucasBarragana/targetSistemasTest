@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Completo - Questões Técnicas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center text-blue-700 mb-8">Projeto Completo - Questões Técnicas</h1>
+        <ul class="space-y-4">
+            <li>
+                <button onclick="questao1()" 
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Questão 1: Soma e Índice
+                </button>
+            </li>
+            <li>
+                <button onclick="questao2()" 
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Questão 2: Sequência de Fibonacci
+                </button>
+            </li>
+            <li>
+                <button onclick="questao3()" 
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Questão 3: Faturamento Diário
+                </button>
+            </li>
+            <li>
+                <button onclick="questao4()" 
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Questão 4: Percentual por Estado
+                </button>
+            </li>
+            <li>
+                <button onclick="questao5()" 
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Questão 5: Inversão de String
+                </button>
+            </li>
+        </ul>
+    </div>
+
+<!-- Popup Container -->
+    <div id="popup" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative">
+            <button 
+                onclick="closePopup()" 
+                class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 text-center rounded hover:bg-red-600 ">
+                x
+            </button>
+            <div class="mt-4">
+                <h2 id="popup-question" class="text-xl font-bold mb-4"></h2>
+                <div id="popup-answer" class="text-gray-700"></div>
+            </div>
+        </div>
+    </div>
+
+<!-- Scripts -->
+<script src="js/questao1.js"></script>
+<script src="js/questao2.js"></script>
+<script src="js/questao3.js"></script>
+<script src="js/questao4.js"></script>
+<script src="js/questao5.js"></script>
+<script>
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        popup.classList.add('hidden');
+        document.getElementById('popup-answer').innerHTML = ''; // Limpa o conteúdo do popup
+    }
+
+    function openPopupWithInput(question, placeholder, callback) {
+        const popup = document.getElementById('popup');
+        document.getElementById('popup-question').textContent = question;
+
+        const inputField = `
+            <input 
+                type="text" 
+                id="popup-input" 
+                class="w-full border border-gray-300 rounded p-2 mb-4" 
+                placeholder="${placeholder}" 
+            />
+            <button 
+                onclick="processInput(${callback})" 
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Confirmar
+            </button>
+        `;
+        document.getElementById('popup-answer').innerHTML = inputField;
+        popup.classList.remove('hidden');
+    }
+
+    function processInput(callback) {
+        const input = document.getElementById('popup-input').value;
+        const response = callback(input);
+        document.getElementById('popup-answer').innerHTML = `<p>${response}</p>`;
+    }
+
+    function openPopup(question, content) {
+        const popup = document.getElementById('popup');
+        document.getElementById('popup-question').textContent = question;
+        document.getElementById('popup-answer').innerHTML = `<p>${content}</p>`;
+        popup.classList.remove('hidden');
+    }
+</script>
+</body>
+</html>
